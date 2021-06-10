@@ -18,7 +18,7 @@
     "image-resizer",
     "video-resizer",
     "on-the-fly"
-  ]
+  ],
   "sideEffects": false,
   "files": [
     "lib"
