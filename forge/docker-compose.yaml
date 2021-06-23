@@ -1,0 +1,29 @@
+version: "3"
+services:
+  rapid-resizer:
+    image: ghcr.io/amitrajput1992/rapid-resizer:base-v1
+    container_name: rapid-resizer
+    ports:
+      - "8083:8083"
+    volumes:
+      - .:/src
+    command: ["sleep", "inf"]
+    privileged: true
+    environment:
+      - PUBLIC_NAMESPACE=local #Used to check environment (is "prod" in production)
+      - PORT=8083
+
+  rapid-resizer-swagger:
+    image: "swaggerapi/swagger-ui:v3.34.0"
+    container_name: rapid-resizer-swagger
+    ports:
+      - "8084:8080"
+    environment:
+      - URL=http://localhost:8083/documentation/json
+      - DOC_EXPANSION=none
+
+networks:
+  default:
+    external:
+      name: rapid-resizer
+
